@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeedShare.Views.SeedListPage"
+             xmlns:viewmodels="clr-namespace:SeedShare.ViewModels"
+             xmlns:model="clr-namespace:SeedShare.Models"
+             BackgroundColor="White"
+             x:DataType="viewmodels:SeedsViewModel"
+             x:Name="this">
+    <ContentPage.BindingContext>
+        <viewmodels:SeedsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Logout" Clicked="Logout_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="1">
+                <Label Text="Seed Availability" HorizontalTextAlignment="Center" FontSize="Medium" FontAttributes="Bold" TextColor="CornflowerBlue"/>
+                <SearchBar x:Name="SeedSearchBar" Placeholder="Search for a seed type" TextColor="LightGray" TextChanged="SeedSearch_TextChanged"/>                
+                <StackLayout Orientation="Horizontal">
+                    <Button x:Name="seedPDF"
+                            Clicked="seedPDF_Clicked"
+                            Text="Generate Report" 
+                            TextColor="Gray"
+                            FontAttributes="Bold"
+                            VerticalOptions="Center" 
+                            HorizontalOptions="StartAndExpand"
+                            BackgroundColor="PaleGreen"/>
+                    <Button Command="{Binding AddCommand}"
+                            Text="Add a seed"
+                            TextColor="Gray"
+                            FontAttributes="Bold"                                    
+                            VerticalOptions="Center" 
+                            HorizontalOptions="EndAndExpand"
+                            BackgroundColor="PaleGreen"/>
+                </StackLayout>            
+            </StackLayout>
+                <ListView x:Name="SeedListView"                                            
+                      CachingStrategy="RecycleElement"
+                      ItemsSource="{Binding Seeds}"
+                      BackgroundColor="Transparent"
+                      HasUnevenRows="True"
+                      SeparatorColor="LightGray"                      
+                      Grid.Row="2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="model:Seeds">
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem
+                                          IsDestructive="True" 
+                                          Text="Delete" />
+                                </ViewCell.ContextActions>
+                                <Frame CornerRadius="20"
+                                           HasShadow="True">
+                                    <StackLayout Orientation="Horizontal" WidthRequest="66">
+                                        <StackLayout VerticalOptions="Center">
+                                            <Label  VerticalOptions="Center"
+                                                    FontSize="Small"
+                                                    Text="{Binding seedName}"/>
+                                            <Label VerticalOptions="Center"
+                                                   FontSize="Small"
+                                                   Text="{Binding packetQuantity}"/>
+                                            <Label VerticalOptions="Center"
+                                                   FontSize="Small"
+                                                   Text="{Binding location}"/>
+                                        <Button x:Name="seedDetailsButton" Text="More details" 
+                                                CommandParameter="{Binding seedId}" 
+                                                Command="{Binding BindingContext.SelectedSeedCommand, Source={x:Reference this}}"/>
+                                    </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

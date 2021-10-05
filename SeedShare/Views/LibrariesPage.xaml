@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SeedShare.Views.LibrariesPage"
+             xmlns:viewmodels="clr-namespace:SeedShare.ViewModels"
+             xmlns:model="clr-namespace:SeedShare.Models"
+             BackgroundColor="White"
+             x:Name="this">
+    <ContentPage.BindingContext>
+        <viewmodels:LibrariesViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>  
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Logout" Clicked="Logout_Clicked"/>
+    </ContentPage.ToolbarItems> 
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="1">
+                <Label Text="Libraries" HorizontalTextAlignment="Center" FontSize="Medium" FontAttributes="Bold" TextColor="CornflowerBlue"/>
+                <SearchBar x:Name="LibrarySearchBar" Placeholder="Search for a Library" TextColor="LightGray" TextChanged="LibrarySearchBar_TextChanged"/>               
+                <StackLayout Orientation="Horizontal">
+                    <Button x:Name="libraryPdf"
+                            Clicked="libraryPdf_Clicked"
+                            Text="Generate Report" 
+                            TextColor="Gray"
+                            FontAttributes="Bold"
+                            VerticalOptions="Center" 
+                            HorizontalOptions="StartAndExpand"
+                            BackgroundColor="PaleGreen"/>
+                    <Button Command="{Binding AddCommand}"
+                            Text="Add a library"
+                            TextColor="Gray"
+                            FontAttributes="Bold"                                    
+                            VerticalOptions="Center" 
+                            HorizontalOptions="EndAndExpand"
+                            BackgroundColor="PaleGreen"/>
+                </StackLayout>
+            </StackLayout>
+            <ListView x:Name="LibraryListView"                     
+                      CachingStrategy="RecycleElement"
+                      ItemsSource="{Binding Libraries}"
+                      BackgroundColor="Transparent"
+                      HasUnevenRows="True"
+                      SeparatorColor="LightGray"                      
+                      Grid.Row="2">
+                    <ListView.ItemTemplate>
+                        <DataTemplate >
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem
+                                          IsDestructive="True" 
+                                          Text="Delete" />
+                                </ViewCell.ContextActions>                                
+                                    <Frame CornerRadius="20"
+                                           HasShadow="True">
+                                    <StackLayout Orientation="Horizontal" WidthRequest="66">
+                                            <StackLayout VerticalOptions="Center">
+                                                <Label  VerticalOptions="Center"
+                                                    FontSize="Small"
+                                                    Text="{Binding libraryName}"/>
+                                                <Label VerticalOptions="Center"
+                                                   FontSize="Small"
+                                                   Text="{Binding libraryLocation}"/>
+                                                <Label VerticalOptions="Center"
+                                                   FontSize="Small"
+                                                   Text="{Binding libraryHours}"/>
+                                                <Label VerticalOptions="Center"
+                                                   FontSize="Small"
+                                                   Text="{Binding libraryPhone}"/>
+                                                <Label VerticalOptions="Center"
+                                                   FontSize="Small"
+                                                   Text="{Binding publicLibraryUrl}"/>
+                                                <Button x:Name="librariesDetailsButton" Text="More details" 
+                                                        CommandParameter="{Binding libraryId}" 
+                                                        Command="{Binding BindingContext.SelectedLibraryCommand, Source={x:Reference this}}" />                                        
+                                    </StackLayout>
+                                        </StackLayout>            
+                                    </Frame>                                
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+            </ListView>            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

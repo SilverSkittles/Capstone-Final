@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModels="clr-namespace:SeedShare.ViewModels"
+             x:DataType="ViewModels:AddSeedViewModel"
+             x:Class="SeedShare.Views.SeedAddPage"
+             Shell.PresentationMode="Modal">
+    <ContentPage.BindingContext>
+        <ViewModels:AddSeedViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label Text="Name of Seed:"/>
+            <Entry Text="{Binding Name}" x:Name="newSeedName"/>
+            <Label Text="How many of this type of seed are now at this location?"/>
+            <Entry Text="{Binding Quantity}" x:Name="newSeedQuantity"/>
+            <Label Text="Name of the library location you're adding to:" />
+            <Entry Text="{Binding Location}" x:Name="newSeedLocation"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+            <Button Text="Save"
+                    Padding="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="EndAndExpand"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Clicked="SeedSave_Button_Clicked"
+                    BackgroundColor="PaleGreen"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

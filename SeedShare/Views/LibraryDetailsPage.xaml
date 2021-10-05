@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:SeedShare.Models"
+             x:Class="SeedShare.Views.LibraryDetailsPage"
+             x:DataType="model:Libraries"
+             Title="View and Edit Library Information">
+    <ContentPage.Content>    
+        <StackLayout>
+            <Label Text="{Binding libraryId}" IsVisible="false" x:Name="editLibraryId"/>
+            <Entry Text="{Binding libraryName}" x:Name="locationName"/>
+            <Entry Text="{Binding libraryStreet}" x:Name="libraryStreet"/>
+            <Entry Text="{Binding libraryCity}" x:Name="libraryCity"/>
+            <Entry Text="{Binding libraryState}" x:Name="libraryState"/>
+            <Entry Text="{Binding libraryZip}" x:Name="zipCode"/>
+            <Entry Text="{Binding libraryPhone}" x:Name="libraryPhone"/>
+            <Entry Text="{Binding libraryHours}" x:Name="libraryHours"/>
+            <Entry Text="{Binding publicLibraryUrl}" x:Name="libraryWebsite"/>            
+            <Button x:Name="MapButton" Clicked="MapButton_Clicked" Text="Click here for directions"/>
+            <StackLayout>
+                <Button x:Name="DeleteLibrary" Text="Delete"
+                        Clicked="DeleteLibrary_Clicked"
+                        VerticalOptions="Center" 
+                        HorizontalOptions="Center"
+                        BackgroundColor="PaleGreen"/>
+                <Button Text="Save" 
+                    x:Name="EditLibraryButtonDetailsPage"
+                    Clicked="EditLibraryButtonDetailsPage_Clicked"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    BackgroundColor="PaleGreen"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

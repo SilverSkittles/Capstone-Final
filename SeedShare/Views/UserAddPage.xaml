@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ViewModels="clr-namespace:SeedShare.ViewModels"
+             x:DataType="ViewModels:LoginViewModel"
+             x:Class="SeedShare.Views.UserAddPage"
+             Shell.PresentationMode="Modal"
+             Shell.FlyoutBehavior="Disabled">
+    <ContentPage.BindingContext>
+        <ViewModels:LoginViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label Text="Select a username and password to access Seed Share"/>
+            <Label Text="Name:" />
+            <Entry Placeholder="Name" x:Name="newUser"/>
+            <Label Text="Password:"/>
+            <Entry Placeholder="Password" x:Name="newPassword"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+            <Button Text="Save"
+                    Padding="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="EndAndExpand"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Clicked="UserSave_Button_ClickedAsync"
+                    BackgroundColor="PaleGreen"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

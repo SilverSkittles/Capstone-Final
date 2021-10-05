@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:SeedShare.Models"
+             x:Class="SeedShare.Views.SeedDetailsPage"
+             x:DataType="model:Seeds"
+             Title="View and Edit Seed Information">
+    <ContentPage.Content>
+        <StackLayout>            
+        <StackLayout Orientation="Vertical">
+            <Entry Text="{Binding seedName}" x:Name="editSeedName"/>
+            <Entry Text="{Binding packetQuantity}" x:Name="editSeedNumber"/>
+            <Entry Text="{Binding location}" x:Name="editSeedLocation"/>
+                <Button x:Name="DeleteSeed"
+                    Text="Delete"
+                    Clicked="DeleteSeed_Clicked"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    BackgroundColor="PaleGreen"/>
+                <Button x:Name="SeedEdit"
+                    Text="Save" Clicked="SeedEdit_Button_Clicked"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    BackgroundColor="PaleGreen"/>
+                
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

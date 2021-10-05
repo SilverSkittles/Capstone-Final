@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:ViewModels="clr-namespace:SeedShare.ViewModels"
+             x:Class="SeedShare.Views.LibraryEditPage"
+             x:DataType="ViewModels:EditLibraryViewModel"
+             Shell.PresentationMode="Modal">
+    <ContentPage.BindingContext>
+        <ViewModels:EditLibraryViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="20">            
+            <Label Text="Name:"/>
+            <Entry Text="{Binding Name}" x:Name="editLibraryName"/>
+            <Label Text="Enter Street Address:"/>
+            <Entry Text="{Binding Street}" x:Name="editLibraryStreet"/>
+            <Label Text="Enter City:"/>
+            <Entry Text="{Binding City}" x:Name="editLibraryCity"/>
+            <Label Text="Enter State:"/>
+            <Entry Text="{Binding State}" x:Name="editLibraryState"/>
+            <Label Text="Enter Zipcode:"/>
+            <Entry Text="{Binding Zip}" x:Name="editLibraryZip"/>
+            <Label Text="Phone, enter 000-000-0000 if not a public library:"/>
+            <Entry Text="{Binding Phone}" x:Name="editLibraryPhone"/>
+            <Label Text="Hours available:"/>
+            <Entry Text="{Binding Hours}" x:Name="editLibraryHours"/>
+            <Label Text="Website, enter NA if not a public library:"/>
+            <Entry Text="{Binding URL}" x:Name="editLibraryWebsite"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+            <Button Text="Save"
+                    Padding="20"
+                    HorizontalOptions="Center"
+                    VerticalOptions="EndAndExpand"
+                    IsEnabled="{Binding IsNotBusy}"
+                    Clicked="LibraryEditSave_Button_Clicked"
+                    BackgroundColor="PaleGreen"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
